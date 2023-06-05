@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class berita extends Model
 {
-    protected $table = 'beritas';
+    protected $guarded = ['id'];
     public function kategori(){
         return $this->belongsTo(kategori::class);
     }
