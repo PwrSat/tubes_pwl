@@ -43,9 +43,9 @@ Route::get('/dunia', [HomeController::class, 'dunia'])->name('dunia');
 
 Route::get('/kriminal', [HomeController::class, 'kriminal'])->name('kriminal');
 
-Route::get('/buat_berita', [HomeController::class, 'buat_berita'])->name('buat_berita');
+Route::get('/tampilkan_buat_berita', [HomeController::class, 'buat_berita'])->name('buat_berita');
 
-Route::get('/buat_berita', [HomeController::class, 'store_berita'])->name('buat_berita');
+Route::post('/buat_berita', [HomeController::class, 'store'])->name('store');
 
 
 

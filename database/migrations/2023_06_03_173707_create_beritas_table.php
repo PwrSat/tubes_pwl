@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('beritas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId("katergori");
-            $table->string('penulis');
+            $table->foreignId("kategori");
+            $table->foreignId("author");
             $table->string('judul');
             $table->string('gambar_berita');
-            $table->string('isi_berita', 2000);
+            $table->text('detail_berita');
+            $table->text('berita');
             $table->integer('dilihat');
         });
     }

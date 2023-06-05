@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Hash;
 use App\Models\Berita; // Update the import statement
+use App\Models\kategori;
 
 class HomeController extends Controller
 {
@@ -30,7 +31,7 @@ class HomeController extends Controller
     }
     public function teknologi()
     {
-        $beritas = Berita::where('katergori', 3)->get();
+        $beritas = Berita::where('kategori', 3)->get();
 
         return view("user.teknologi",[
             'beritas' => $beritas
@@ -38,7 +39,7 @@ class HomeController extends Controller
     }
     public function politik()
     {
-        $beritas = Berita::where('katergori', 4)->get();
+        $beritas = Berita::where('kategori', 4)->get();
 
         return view("user.politik",[
             'beritas' => $beritas
@@ -46,7 +47,7 @@ class HomeController extends Controller
     }
     public function olahraga()
     {
-        $beritas = Berita::where('katergori', 1)->get();
+        $beritas = Berita::where('kategori', 1)->get();
 
         return view("user.olahraga",[
             'beritas' => $beritas
@@ -54,7 +55,7 @@ class HomeController extends Controller
     }
     public function hiburan()
     {
-        $beritas = Berita::where('katergori', 5)->get();
+        $beritas = Berita::where('kategori', 5)->get();
 
         return view("user.hiburan",[
             'beritas' => $beritas
@@ -62,7 +63,7 @@ class HomeController extends Controller
     }
     public function dunia()
     {
-        $beritas = Berita::where('katergori', 2)->get();
+        $beritas = Berita::where('kategori', 2)->get();
 
         return view("user.dunia",[
             'beritas' => $beritas
@@ -70,7 +71,11 @@ class HomeController extends Controller
     }
     public function kriminal()
     {
-        return view("user.criminal");
+        $beritas = Berita::where('kategori', 6)->get();
+
+        return view("user.criminal",[
+            'beritas' => $beritas
+        ]);
     }
     public function detail($id)
     {
@@ -80,10 +85,9 @@ class HomeController extends Controller
 
         return view("user.detail", compact('beritas'));
     }
-    public function buat_berita()
-    {
-
-        return view("user.buat_berita");
+    public function buat_berita(){
+        $kategori = kategori::all();
+        return view("user.buat_berita", compact('kategori'));
     }
 
     /**
@@ -97,9 +101,15 @@ class HomeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store1(Request $request)
-    {
-        //
+    public function store(Request $request){
+        berita::create([
+            'author' => $request->user_id,
+            'judul' => $request->judul,
+            'berita' => $request->body,
+            'detail_berita' => $request->excerpt,
+            'kategori' => $request->kategori,
+        ]);
+        dd($request->all());
     }
 
     /**

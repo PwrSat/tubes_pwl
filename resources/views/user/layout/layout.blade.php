@@ -12,10 +12,9 @@
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     {{-- css file --}}
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/gambar.css">
-    <link rel="stylesheet" href="css/me.css">
-    <link rel="stylesheet" href="css/tes.css">
+    <link rel="stylesheet" href="{{ asset('css/gambar.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/me.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/tes.css')}}">
     <link rel="stylesheet" href="/code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/autocomplete.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
