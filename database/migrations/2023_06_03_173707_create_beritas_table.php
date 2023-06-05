@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId("kategori");
             $table->foreignId("author");
             $table->string('judul');
-            $table->string('gambar_berita');
+            $table->string('gambar_berita')->nullable();
             $table->text('detail_berita');
             $table->text('berita');
             $table->integer('dilihat');

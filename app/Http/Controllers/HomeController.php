@@ -102,14 +102,31 @@ class HomeController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request){
+        $namaFileBaru = '';
+        if($request->hasFile('image')){
+            // define image location in local path
+            $location = public_path('/img');
+
+            // membuat nama gambar baru agar tidak duplikat
+            $namaFile = $request->file('image')->getClientOriginalName();
+            $namaFileBaru = substr(uniqid(), 5, 5);
+            $namaFileBaru .= '_';
+            $namaFileBaru .= $namaFile;
+
+            // ambil file image dan simpan ke local server
+            $request->file('image')->move($location, $namaFileBaru);
+        }
         berita::create([
+            'kategori' => $request->kategori,
             'author' => $request->user_id,
             'judul' => $request->judul,
-            'berita' => $request->body,
+            'gambar_berita' => $namaFileBaru,
             'detail_berita' => $request->excerpt,
-            'kategori' => $request->kategori,
+            'berita' => $request->body,
+            'dilihat' => 0,
         ]);
-        dd($request->all());
+
+        return redirect('/home');
     }
 
     /**
